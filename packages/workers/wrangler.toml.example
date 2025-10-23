@@ -1,0 +1,63 @@
+name = "anynote-workers"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# D1 数据库绑定
+[[d1_databases]]
+binding = "DB"  # 在代码中通过 env.DB 访问
+database_name = "anynote-db"
+database_id = "your-development-database-id"  # 替换为你的开发环境数据库 ID
+
+# KV 命名空间（用于速率限制）
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "your-development-kv-id"  # 替换为你的开发环境 KV ID
+
+# 环境变量
+[vars]
+ENVIRONMENT = "development"
+LOG_LEVEL = "debug"
+JWT_EXPIRES_IN = "7d"
+INVITE_CODE = "test-invite-code-2025"
+
+# CORS 配置
+[vars.CORS]
+ALLOWED_ORIGINS = "http://localhost:5173,http://localhost:3000"
+
+# 生产环境配置
+[env.production]
+name = "anynote-workers-production"
+
+# 生产环境 D1 数据库
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "anynote-db-production"
+database_id = "your-production-database-id"  # 替换为你的生产环境数据库 ID
+
+# 生产环境 KV 命名空间
+[[env.production.kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "your-production-kv-id"  # 替换为你的生产环境 KV ID
+
+[env.production.vars]
+ENVIRONMENT = "production"
+LOG_LEVEL = "info"
+JWT_EXPIRES_IN = "7d"
+
+[env.production.vars.CORS]
+ALLOWED_ORIGINS = "https://your-frontend-domain.com"  # 替换为你的前端域名
+
+# 生产环境的敏感配置应通过 wrangler secret 设置：
+# wrangler secret put JWT_SECRET --env production
+# wrangler secret put INVITE_CODE --env production
+# wrangler secret put TURNSTILE_SECRET_KEY --env production
+
+# Workers 配置
+[build]
+command = ""  # 使用 esbuild，无需额外构建命令
+
+# Durable Objects 配置（实时同步 - 未来功能）
+# [[durable_objects.bindings]]
+# name = "SYNC_COORDINATOR"
+# class_name = "SyncCoordinator"
+# script_name = "anynote-workers"

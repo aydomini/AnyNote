@@ -1,0 +1,44 @@
+{
+  "name": "anynote",
+  "version": "0.1.0",
+  "private": true,
+  "description": "端到端加密的私人笔记与密码管理器",
+  "keywords": [
+    "notes",
+    "password-manager",
+    "end-to-end-encryption",
+    "zero-knowledge",
+    "cloudflare",
+    "privacy"
+  ],
+  "author": "AnyNote Team",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter ./packages/* dev",
+    "build": "pnpm --filter ./packages/* build",
+    "test": "pnpm --filter ./packages/* test",
+    "lint": "pnpm --filter ./packages/* lint",
+    "clean": "pnpm --filter ./packages/* clean",
+    "workers:dev": "pnpm --filter @anynote/workers dev",
+    "workers:deploy": "pnpm --filter @anynote/workers deploy",
+    "web:dev": "pnpm --filter @anynote/web dev",
+    "web:dev:demo": "pnpm --filter @anynote/web dev:demo",
+    "web:build": "pnpm --filter @anynote/web build",
+    "web:deploy": "pnpm --filter @anynote/web deploy",
+    "db:create": "wrangler d1 create anynote-db",
+    "db:migrate": "wrangler d1 execute anynote-db --file=./schema/schema.sql",
+    "db:local": "wrangler d1 execute anynote-db --local --file=./schema/schema.sql"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
