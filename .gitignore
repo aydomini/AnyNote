@@ -1,0 +1,110 @@
+# 依赖
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+.env
+.env.local
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+
+# 构建输出
+*.tsbuildinfo
+
+# 临时文件
+*.tmp
+.cache/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Cloudflare（包含真实的数据库 ID 和 KV ID）
+packages/workers/wrangler.toml
+wrangler.toml.local
+.dev.vars.local
+
+# 加密密钥（绝不提交）
+*.key
+*.pem
+secrets/
+key.md
+
+# 环境变量（包含敏感信息）
+.env.production
+*.env
+
+# Claude Code 本地配置和项目文档（包含隐私）
+.claude/
+CLAUDE.md
+AGENTS.md
+
+# --- OSS 发布过滤（前端闭源策略）---
+# 前端 UI 与交互保持闭源，开源仅包含后端和安全模块
+# 开源范围：
+# ✅ packages/workers/ 全部（后端 API、认证、数据库）
+# ✅ packages/shared/src/crypto/ （加密引擎）
+# ✅ packages/workers/migrations/ 与 schema/（数据库结构）
+# ✅ packages/web/src/lib/ 中的安全工具（api.ts, crypto.ts, device.ts 等）
+# ✅ packages/web/src/stores/auth-store.ts（认证状态管理）
+# ✅ 示例配置：wrangler.toml.example, package.json 等
+# ❌ 前端 UI 界面完全闭源
+
+# 前端 UI 目录（闭源）
+packages/web/public/
+packages/web/src/components/
+packages/web/src/pages/
+packages/web/src/hooks/
+packages/web/src/i18n/
+
+# 前端核心文件（闭源）
+packages/web/src/App.tsx
+packages/web/src/main.tsx
+packages/web/src/index.css
+
+# 前端状态管理（闭源，auth-store.ts 除外）
+packages/web/src/stores/settings-store.ts
+
+# 前端 lib 中的 UI 工具（闭源）
+packages/web/src/lib/simple-markdown.tsx
+packages/web/src/lib/demo-data.ts
+
+# 前端构建配置（闭源）
+packages/web/tailwind.config.js
+packages/web/postcss.config.cjs
+packages/web/vite.config.ts
+packages/web/tsconfig.json
+packages/web/tsconfig.node.json
+packages/web/src/vite-env.d.ts
+packages/web/dist/
+
+# ⚠️ 白名单（以下安全文件必须开源）
+# packages/web/src/lib/api.ts
+# packages/web/src/lib/crypto.ts
+# packages/web/src/lib/device.ts
+# packages/web/src/lib/device-fingerprint.ts
+# packages/web/src/lib/key-storage.ts
+# packages/web/src/lib/lru-cache.ts
+# packages/web/src/lib/pwned-password.ts
+# packages/web/src/stores/auth-store.ts
+
